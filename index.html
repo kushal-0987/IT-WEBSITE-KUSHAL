@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HPS Trek | One Page Adventure</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link rel="stylesheet" href="style.css" />
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    /* Glassmorphism overlay animation */
+    .hero-overlay-info {
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+      transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1);
+    }
+    .hero-overlay-info.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .hero-overlay-info > div {
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .hero-overlay-info > div:hover {
+      box-shadow: 0 12px 40px 0 rgba(31,38,135,0.45), 0 0 0 4px rgba(39, 174, 96, 0.15);
+      transform: scale(1.035) translateY(-2px);
+    }
+    /* Carousel dark overlay */
+    .hero-section {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(20, 24, 32, 0.45);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .hero-overlay-info {
+      z-index: 2;
+      position: relative;
+    }
+    /* Featured Destinations Card Style */
+    #featured-destinations .card {
+      border-radius: 1.5rem !important;
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18), 0 2px 8px 0 rgba(39, 174, 96, 0.10);
+      background: #fff;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    #featured-destinations .card:hover {
+      box-shadow: 0 16px 48px 0 rgba(31,38,135,0.22), 0 4px 16px 0 rgba(39, 174, 96, 0.15);
+      transform: translateY(-4px) scale(1.025);
+    }
+    #featured-destinations .card-img-top {
+      border-top-left-radius: 1.5rem !important;
+      border-top-right-radius: 1.5rem !important;
+      object-fit: cover;
+      height: 180px;
+    }
+    /* Glassmorphism Navbar */
+    .navbar-glass {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      height: auto;
+      background: rgba(231, 6, 6, 0.25);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .navbar-glass__logo {
+      font-size: 1.7rem;
+      font-weight: bold;
+      color: #3a6645;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .navbar-glass__menu {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1.2rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar-glass__link {
+      color: #3b80cf;
+      text-decoration: none;
+      font-size: 1.08rem;
+      font-weight: 600;
+      padding: 0.5rem 1.1rem;
+      border-radius: 12px;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      position: relative;
+      backdrop-filter: none;
+    }
+    .navbar-glass__link:hover, .navbar-glass__link:focus {
+     
+      color: #40f3db;
+      box-shadow: 0 2px 8px rgba(64,111,243,0.08);
+    }
+    @media (max-width: 900px) {
+      .navbar-glass {
+        flex-direction: column;
+        height: auto;
+        padding: 0.5rem 0.5rem;
+      }
+      .navbar-glass__logo {
+        margin-bottom: 0.5rem;
+      }
+      .navbar-glass__menu {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.2rem;
+      }
+      .navbar-glass__link {
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Navbar -->
+  <nav class="navbar-glass">
+    <div class="navbar-glass__logo">
+      <a class="navbar-brand navbar-logo" href="/index.html">
+        <img src="/logo%20final.png" alt="HPS Trek Logo" class="navbar-logo-img" />
+      </a>
+    </div>
+    <ul class="navbar-glass__menu">
+      <li><a href="index.html" class="navbar-glass__link">Home</a></li>
+      <li><a href="pages/about.html" class="navbar-glass__link">About</a></li>
+      <li><a href="pages/info.html" class="navbar-glass__link">Trek Info</a></li>
+      <li><a href="pages/pricing.html" class="navbar-glass__link">Pricing</a></li>
+      <li><a href="pages/booking.html" class="navbar-glass__link">Booking</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero-section" id="heroSection">
+    <div class="hero-overlay"></div>
+
+    <!-- Overlay Info Box -->
+    <div class="hero-overlay-info position-absolute w-100 d-flex flex-column align-items-center justify-content-center text-center" style="top:0; left:0; height:100%; z-index:2; pointer-events:none;">
+      <div style="
+        background: rgba(24, 28, 40, 0.55);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(12px) saturate(160%);
+        -webkit-backdrop-filter: blur(12px) saturate(160%);
+        border-radius: 18px;
+        border: 1.5px solid rgba(255,255,255,0.18);
+        max-width: 340px;
+        margin-top: 90px;
+        padding: 1.5rem 1.5rem 1.2rem 1.5rem;
+        pointer-events:auto;">
+        <h1 class="h4 text-white font-weight-bold mb-2" style="letter-spacing:0.5px;">Your Himalayan Adventure Awaits</h1>
+        
+        <a href="#booking" class="btn btn-success btn-sm font-weight-bold px-4 py-2" style="backdrop-filter:none; pointer-events:auto;">Book Now</a>
+      </div>
+    </div>
+
+<
+
+    <div class="testimonial-section">
+      <div class="testimonial-slider" id="dynamicSlide">
+        <div class="testimonial-content">
+          <div class="testimonial-title" id="slideTitle"></div>
+          <div class="testimonial-text" id="slideText"></div>
+        </div>
+
+        <button class="slider-nav slider-prev" id="prevBtn">‹</button>
+        <button class="slider-nav slider-next" id="nextBtn">›</button>
+
+        <div class="slider-indicators" id="thumbnailContainer"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Featured Destinations Section -->
+  <section id="featured-destinations" class="py-5 bg-white">
+    <div class="container">
+      <h2 class="text-center text-success font-weight-bold mb-5" style="font-size:2.2rem;">Featured Destinations</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="image-1.jpg" class="card-img-top rounded-top" alt="Triund Hill">
+            <div class="card-body">
+              <h5 class="card-title text-success font-weight-bold">Triund Hill</h5>
+              <p class="card-text text-muted small">A scenic ridge in the Dhauladhar range, perfect for beginners and known for its panoramic views of the Kangra valley and snow-capped peaks.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="image-2.jpg" class="card-img-top rounded-top" alt="Indrahar Pass">
+            <div class="card-body">
+              <h5 class="card-title text-success font-weight-bold">Indrahar Pass</h5>
+              <p class="card-text text-muted small">A thrilling trek to 4,342m, offering dramatic landscapes, rocky trails, and a gateway between Kangra and Chamba valleys.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="image-3.jpg" class="card-img-top rounded-top" alt="Kareri Lake">
+            <div class="card-body">
+              <h5 class="card-title text-success font-weight-bold">Kareri Lake</h5>
+              <p class="card-text text-muted small">A pristine glacial lake surrounded by alpine meadows and pine forests, ideal for nature lovers and photographers.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-4">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" class="card-img-top rounded-top" alt="Laka Glacier">
+            <div class="card-body">
+              <h5 class="card-title text-success font-weight-bold">Laka Glacier</h5>
+              <p class="card-text text-muted small">A unique trek to a glacier close to McLeod Ganj, offering a mix of snow adventure and breathtaking Himalayan vistas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const slideContainer = document.getElementById('dynamicSlide');
+      const heroSection = document.getElementById('heroSection');
+      const title = document.getElementById('slideTitle');
+      const text = document.getElementById('slideText');
+      const thumbContainer = document.getElementById('thumbnailContainer');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+
+      const slideData = [
+        {
+          image: 'image-1.jpg',
+          title: 'Breathtaking',
+          text: 'We organize professional adventures! The most amazing corners of our planet. Our Routes change peoples lives forever.'
+        },
+        {
+          image: 'image-2.jpg',
+          title: 'Adventure Awaits',
+          text: 'Discover hidden gems and create unforgettable memories. Every trail tells a story, every peak offers a new perspective.'
+        },
+        {
+          image: 'image-3.jpg',
+          title: 'Life Changing',
+          text: 'Join thousands of adventurers who have found their passion through our carefully curated routes and expert guidance.'
+        }
+      ];
+
+      let currentIndex = 0;
+
+      slideData.forEach((item, index) => {
+        const thumb = document.createElement('img');
+        thumb.src = item.image;
+        thumb.classList.add('slider-thumb');
+        if (index === 0) thumb.classList.add('active');
+        thumb.addEventListener('click', () => {
+          currentIndex = index;
+          showSlide(currentIndex);
+        });
+        thumbContainer.appendChild(thumb);
+      });
+
+      const thumbs = document.querySelectorAll('.slider-thumb');
+
+      function showSlide(index) {
+        const data = slideData[index];
+        slideContainer.style.backgroundImage = `url('${data.image}')`;
+        heroSection.style.backgroundImage = `url('${data.image}')`;
+        title.textContent = data.title;
+        text.textContent = data.text;
+
+        thumbs.forEach((thumb, i) => {
+          thumb.classList.toggle('active', i === index);
+        });
+      }
+
+      function changeSlide(direction) {
+        currentIndex = (currentIndex + direction + slideData.length) % slideData.length;
+        showSlide(currentIndex);
+      }
+
+      setInterval(() => changeSlide(1), 5000);
+      prevBtn.addEventListener('click', () => changeSlide(-1));
+      nextBtn.addEventListener('click', () => changeSlide(1));
+
+      showSlide(currentIndex);
+    });
+    // Animate glassmorphism overlay on load
+    window.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        document.querySelector('.hero-overlay-info').classList.add('visible');
+      }, 200);
+    });
+  </script>
+
+  <!-- About Section -->
+  <section id="about" class="py-16 px-6 bg-white text-center">
+    <h3 class="text-3xl font-bold text-green-700 mb-4">Why HPS Trek?</h3>
+    <p class="max-w-3xl mx-auto text-lg text-gray-700">The HPS (Himalayan Peak Stretch) Trek is not just a hike – it’s a journey through soul-touching landscapes, glacial lakes, and awe-inspiring ridges. Whether you’re a seasoned trekker or a nature lover, this trek offers an unforgettable experience guided by experts with local insight.</p>
+  </section>
+
+  <!-- Trek Info -->
+  <section id="info" class="bg-gray-100 py-16 px-6">
+    <div class="max-w-5xl mx-auto text-center">
+      <h3 class="text-3xl font-bold text-green-700 mb-4">Trek Overview</h3>
+      <p class="mb-6 text-gray-700">Here’s what you need to know before you trek:</p>
+      <ul class="text-left list-disc list-inside text-lg text-gray-700 mb-8">
+        <li>⛰️ Duration: 7 Days / 6 Nights</li>
+        <li>🚩 Max Altitude: 4,500m</li>
+        <li>📍 Starting Point: Dharamshala</li>
+        <li>🕐 Best Season: May – October</li>
+        <li>👣 Difficulty: Moderate</li>
+      </ul>
+
+    <h4 class="text-2xl font-semibold mb-3">Watch the Itinerary</h4>
+<video autoplay loop muted playsinline class="w-full rounded shadow-lg">
+  <source src="4446471-uhd_3840_2160_25fps.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="py-16 px-6 bg-white text-center">
+    <h3 class="text-3xl font-bold text-green-700 mb-6">Pricing Packages</h3>
+    <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <!-- Basic -->
+      <div class="bg-gray-100 p-6 rounded shadow">
+        <h4 class="text-xl font-semibold mb-2">Basic</h4>
+        <p class="text-2xl font-bold text-green-600 mb-4">₹14,999</p>
+        <ul class="text-left list-disc list-inside text-gray-700">
+          <li>Accommodation</li>
+          <li>Meals</li>
+          <li>Guide Support</li>
+        </ul>
+      </div>
+      <!-- Premium -->
+      <div class="bg-gray-100 p-6 rounded shadow border-2 border-green-600">
+        <h4 class="text-xl font-semibold mb-2">Premium</h4>
+        <p class="text-2xl font-bold text-green-700 mb-4">₹24,999</p>
+        <ul class="text-left list-disc list-inside text-gray-700">
+          <li>Everything in Basic</li>
+          <li>Experienced Guide</li>
+          <li>Gear Rental</li>
+          <li>Travel Insurance</li>
+        </ul>
+      </div>
+      <!-- Luxury -->
+      <div class="bg-gray-100 p-6 rounded shadow">
+        <h4 class="text-xl font-semibold mb-2">Luxury</h4>
+        <p class="text-2xl font-bold text-green-600 mb-4">₹39,999</p>
+        <ul class="text-left list-disc list-inside text-gray-700">
+          <li>All Premium Features</li>
+          <li>Luxury Camps</li>
+          <li>Helicopter Rescue</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Form -->
+  <section id="booking" class="py-16 px-6 bg-gray-100 text-center">
+    <h3 class="text-3xl font-bold text-green-700 mb-6">Book Your Trek</h3>
+    <form class="max-w-xl mx-auto space-y-4 text-left">
+      <input type="text" placeholder="Your Name" required class="w-full p-3 border rounded" />
+      <input type="email" placeholder="Your Email" required class="w-full p-3 border rounded" />
+      <select class="w-full p-3 border rounded">
+        <option>Select Package</option>
+        <option>Basic - ₹14,999</option>
+        <option>Premium - ₹24,999</option>
+        <option>Luxury - ₹39,999</option>
+      </select>
+      <textarea placeholder="Any Notes..." class="w-full p-3 border rounded" rows="4"></textarea>
+      <button type="submit" class="w-full bg-green-600 text-white py-3 rounded hover:bg-green-700">Confirm Booking</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-modern">
+    <div class="footer-container">
+      <div class="footer-col">
+        <div class="footer-brand">HPS Trek</div>
+        <div class="footer-desc">
+          Explore the Himalayas with expert guides and unforgettable experiences. Join us for your next adventure!
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/pages/about.html">About</a></li>
+          <li><a href="/pages/booking.html">Booking</a></li>
+          <li><a href="/pages/info.html">Info</a></li>
+          <li><a href="/pages/pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul class="footer-contact">
+          <li>Email: <a href="mailto:kushalpokhrel21@gmail.com">kushalpokhrel21@gmail.com</a></li>
+          <li>Phone: <a href="tel:9764641467">9764641467</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook">
+            <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.325 24h11.495v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter">
+            <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557a9.83 9.83 0 0 1-2.828.775 4.932 4.932 0 0 0 2.165-2.724c-.951.564-2.005.974-3.127 1.195A4.916 4.916 0 0 0 16.616 3c-2.717 0-4.924 2.206-4.924 4.924 0 .386.044.763.127 1.124C7.728 8.807 4.1 6.884 1.671 3.965c-.423.722-.666 1.561-.666 2.475 0 1.708.87 3.216 2.188 4.099a4.904 4.904 0 0 1-2.229-.616c-.054 2.281 1.581 4.415 3.949 4.89a4.936 4.936 0 0 1-2.224.084c.627 1.956 2.444 3.377 4.6 3.417A9.867 9.867 0 0 1 0 21.543a13.94 13.94 0 0 0 7.548 2.212c9.057 0 14.009-7.513 14.009-14.009 0-.213-.005-.425-.014-.636A10.012 10.012 0 0 0 24 4.557z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.974.974 1.246 2.241 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.974.974-2.241 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.974-.974-1.246-2.241-1.308-3.608C2.175 15.647 2.163 15.267 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608C4.515 2.497 5.782 2.225 7.148 2.163 8.414 2.105 8.794 2.163 12 2.163zm0-2.163C8.741 0 8.332.013 7.052.072 5.771.131 4.659.425 3.678 1.406c-.98.98-1.274 2.092-1.333 3.373C2.013 5.668 2 6.077 2 12c0 5.923.013 6.332.072 7.612.059 1.281.353 2.393 1.333 3.373.98.98 2.092 1.274 3.373 1.333C8.332 23.987 8.741 24 12 24s3.668-.013 4.948-.072c1.281-.059 2.393-.353 3.373-1.333.98-.98 1.274-2.092 1.333-3.373.059-1.28.072-1.689.072-7.612 0-5.923-.013-6.332-.072-7.612-.059-1.281-.353-2.393-1.333-3.373-.98-.98-2.092-1.274-3.373-1.333C15.668.013 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a2.994 2.994 0 0 0-2.112-2.112C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.386.574a2.994 2.994 0 0 0-2.112 2.112C0 8.072 0 12 0 12s0 3.928.502 5.814a2.994 2.994 0 0 0 2.112 2.112C4.5 20.5 12 20.5 12 20.5s7.5 0 9.386-.574a2.994 2.994 0 0 0 2.112-2.112C24 15.928 24 12 24 12s0-3.928-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn">
+            <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.327-.027-3.037-1.849-3.037-1.851 0-2.132 1.445-2.132 2.939v5.667H9.358V9h3.414v1.561h.049c.476-.899 1.637-1.849 3.369-1.849 3.602 0 4.267 2.369 4.267 5.455v6.285zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zm1.777 13.019H3.56V9h3.554v11.452z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2024 HPS Trek. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>
