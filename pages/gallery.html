@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HPS Trek | Gallery</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <!-- Navbar -->
+  <nav class="navbar-glass">
+    <div class="navbar-glass__logo">
+      <a class="navbar-brand navbar-logo" href="/index.html">
+        <img src="../img/logo%20final.png" alt="HPS Trek Logo" class="navbar-logo-img" />
+      </a>
+    </div>
+    <div class="navbar-hamburger" id="navbarHamburger" aria-label="Toggle navigation" tabindex="0">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul class="navbar-glass__menu" id="navbarMenu">
+      <li><a href="gallery.html" class="navbar-glass__link">Gallery</a></li>
+      <li><a href="about.html" class="navbar-glass__link">About</a></li>
+      <li><a href="info.html" class="navbar-glass__link">Trek Info</a></li>
+      <li><a href="pricing.html" class="navbar-glass__link">Pricing</a></li>
+      <li><a href="booking.html" class="navbar-glass__link">Booking</a></li>
+      <li><a href="../index.html" class="navbar-glass__link">Home</a></li>
+    </ul>
+  </nav>
+
+  <main class="gallery-main-section">
+    <section class="gallery-hero-section">
+      <h1 class="gallery-title">Photo Gallery</h1>
+      <p class="gallery-desc">Explore our adventures and breathtaking Himalayan moments. Click any image to view it larger.</p>
+    </section>
+    <section class="gallery-grid-section">
+      <div class="gallery-grid">
+        <a class="gallery-thumb" href="../img/pexels-hoover-tung-153639-1980877.jpg" target="_blank">
+          <img src="../img/pexels-hoover-tung-153639-1980877.jpg" alt="Pexels Hoover Tung Mountain Landscape" />
+        </a>
+        <a class="gallery-thumb" href="../img/pexels-robertforevr-2496880.jpg" target="_blank">
+          <img src="../img/pexels-robertforevr-2496880.jpg" alt="Pexels Robertforevr Lake" />
+        </a>
+        <a class="gallery-thumb" href="../img/pexels-pixabay-264151.jpg" target="_blank">
+          <img src="../img/pexels-pixabay-264151.jpg" alt="Pexels Pixabay Forest" />
+        </a>
+        <a class="gallery-thumb" href="../img/pexels-dreamypixel-554609.jpg" target="_blank">
+          <img src="../img/pexels-dreamypixel-554609.jpg" alt="Pexels Dreamypixel Snowy Mountains" />
+        </a>
+        <a class="gallery-thumb" href="../img/pexels-tirachard-kumtanom-112571-450062.jpg" target="_blank">
+          <img src="../img/pexels-tirachard-kumtanom-112571-450062.jpg" alt="Pexels Tirachard Kumtanom Trek" />
+        </a>
+        <a class="gallery-thumb" href="../img/pexels-sanmane-1365425.jpg" target="_blank">
+          <img src="../img/pexels-sanmane-1365425.jpg" alt="Pexels Sanmane Valley" />
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-modern">
+    <div class="footer-container">
+      <div class="footer-col">
+        <div class="footer-brand">HPS Trek</div>
+        <div class="footer-desc">
+          Explore the Himalayas with expert guides and unforgettable experiences. Join us for your next adventure!
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/pages/about.html">About</a></li>
+          <li><a href="/pages/booking.html">Booking</a></li>
+          <li><a href="/pages/info.html">Info</a></li>
+          <li><a href="/pages/pricing.html">Pricing</a></li>
+          <li><a href="/pages/gallery.html">Gallery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul class="footer-contact">
+          <li>Email: <a href="mailto:kushalpokhrel21@gmail.com">kushalpokhrel21@gmail.com</a></li>
+          <li>Phone: <a href="tel:9764641467">9764641467</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <div class="footer-social">
+          <!-- Social icons as in index.html -->
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2024 HPS Trek. All rights reserved.
+    </div>
+  </footer>
+</body>
+<script>
+// Hamburger menu toggle for mobile
+const hamburger = document.getElementById('navbarHamburger');
+const menu = document.getElementById('navbarMenu');
+hamburger.addEventListener('click', function() {
+  menu.classList.toggle('active');
+});
+hamburger.addEventListener('keypress', function(e) {
+  if (e.key === 'Enter' || e.key === ' ') {
+    menu.classList.toggle('active');
+  }
+});
+</script>
+</html> 

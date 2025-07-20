@@ -9,133 +9,6 @@
   <link rel="stylesheet" href="style.css" />
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
-    /* Glassmorphism overlay animation */
-    .hero-overlay-info {
-      opacity: 0;
-      transform: translateY(30px) scale(0.98);
-      transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1);
-    }
-    .hero-overlay-info.visible {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-    .hero-overlay-info > div {
-      transition: box-shadow 0.3s, transform 0.3s;
-    }
-    .hero-overlay-info > div:hover {
-      box-shadow: 0 12px 40px 0 rgba(31,38,135,0.45), 0 0 0 4px rgba(39, 174, 96, 0.15);
-      transform: scale(1.035) translateY(-2px);
-    }
-    /* Carousel dark overlay */
-    .hero-section {
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-section::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(20, 24, 32, 0.45);
-      z-index: 1;
-      pointer-events: none;
-    }
-    .hero-overlay-info {
-      z-index: 2;
-      position: relative;
-    }
-    /* Featured Destinations Card Style */
-    #featured-destinations .card {
-      border-radius: 1.5rem !important;
-      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18), 0 2px 8px 0 rgba(39, 174, 96, 0.10);
-      background: #fff;
-      transition: box-shadow 0.3s, transform 0.3s;
-    }
-    #featured-destinations .card:hover {
-      box-shadow: 0 16px 48px 0 rgba(31,38,135,0.22), 0 4px 16px 0 rgba(39, 174, 96, 0.15);
-      transform: translateY(-4px) scale(1.025);
-    }
-    #featured-destinations .card-img-top {
-      border-top-left-radius: 1.5rem !important;
-      border-top-right-radius: 1.5rem !important;
-      object-fit: cover;
-      height: 180px;
-    }
-    /* Glassmorphism Navbar */
-    .navbar-glass {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.2rem 4rem;
-      height: auto;
-      background: rgba(231, 6, 6, 0.25);
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
-      backdrop-filter: blur(16px) saturate(160%);
-      -webkit-backdrop-filter: blur(16px) saturate(160%);
-      border: 1px solid rgba(255,255,255,0.18);
-    }
-    .navbar-glass__logo {
-      font-size: 1.7rem;
-      font-weight: bold;
-      color: #3a6645;
-      letter-spacing: 1px;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .navbar-glass__menu {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 1.2rem;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-    .navbar-glass__link {
-      color: #3b80cf;
-      text-decoration: none;
-      font-size: 1.08rem;
-      font-weight: 600;
-      padding: 0.5rem 1.1rem;
-      border-radius: 12px;
-      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-      position: relative;
-      backdrop-filter: none;
-    }
-    .navbar-glass__link:hover, .navbar-glass__link:focus {
-     
-      color: #40f3db;
-      box-shadow: 0 2px 8px rgba(64,111,243,0.08);
-    }
-    @media (max-width: 900px) {
-      .navbar-glass {
-        flex-direction: column;
-        height: auto;
-        padding: 0.5rem 0.5rem;
-      }
-      .navbar-glass__logo {
-        margin-bottom: 0.5rem;
-      }
-      .navbar-glass__menu {
-        flex-direction: column;
-        width: 100%;
-        gap: 0.2rem;
-      }
-      .navbar-glass__link {
-        width: 100%;
-        justify-content: flex-start;
-      }
-    }
-  </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
 
@@ -143,15 +16,21 @@
   <nav class="navbar-glass">
     <div class="navbar-glass__logo">
       <a class="navbar-brand navbar-logo" href="/index.html">
-        <img src="/logo%20final.png" alt="HPS Trek Logo" class="navbar-logo-img" />
+        <img src="img/logo%20final.png" alt="HPS Trek Logo" class="navbar-logo-img" />
       </a>
     </div>
-    <ul class="navbar-glass__menu">
+    <div class="navbar-hamburger" id="navbarHamburger" aria-label="Toggle navigation" tabindex="0">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul class="navbar-glass__menu" id="navbarMenu">
       <li><a href="index.html" class="navbar-glass__link">Home</a></li>
       <li><a href="pages/about.html" class="navbar-glass__link">About</a></li>
       <li><a href="pages/info.html" class="navbar-glass__link">Trek Info</a></li>
       <li><a href="pages/pricing.html" class="navbar-glass__link">Pricing</a></li>
       <li><a href="pages/booking.html" class="navbar-glass__link">Booking</a></li>
+      <li><a href="pages/gallery.html" class="navbar-glass__link">Gallery</a></li>
     </ul>
   </nav>
 
@@ -201,7 +80,7 @@
       <div class="row justify-content-center">
         <div class="col-md-6 col-lg-3 mb-4">
           <div class="card h-100 shadow-sm border-0">
-            <img src="image-1.jpg" class="card-img-top rounded-top" alt="Triund Hill">
+            <img src="img/image-1.jpg" class="card-img-top rounded-top" alt="Triund Hill">
             <div class="card-body">
               <h5 class="card-title text-success font-weight-bold">Triund Hill</h5>
               <p class="card-text text-muted small">A scenic ridge in the Dhauladhar range, perfect for beginners and known for its panoramic views of the Kangra valley and snow-capped peaks.</p>
@@ -210,7 +89,7 @@
         </div>
         <div class="col-md-6 col-lg-3 mb-4">
           <div class="card h-100 shadow-sm border-0">
-            <img src="image-2.jpg" class="card-img-top rounded-top" alt="Indrahar Pass">
+            <img src="img/image-2.jpg" class="card-img-top rounded-top" alt="Indrahar Pass">
             <div class="card-body">
               <h5 class="card-title text-success font-weight-bold">Indrahar Pass</h5>
               <p class="card-text text-muted small">A thrilling trek to 4,342m, offering dramatic landscapes, rocky trails, and a gateway between Kangra and Chamba valleys.</p>
@@ -219,7 +98,7 @@
         </div>
         <div class="col-md-6 col-lg-3 mb-4">
           <div class="card h-100 shadow-sm border-0">
-            <img src="image-3.jpg" class="card-img-top rounded-top" alt="Kareri Lake">
+            <img src="img/image-3.jpg" class="card-img-top rounded-top" alt="Kareri Lake">
             <div class="card-body">
               <h5 class="card-title text-success font-weight-bold">Kareri Lake</h5>
               <p class="card-text text-muted small">A pristine glacial lake surrounded by alpine meadows and pine forests, ideal for nature lovers and photographers.</p>
@@ -251,17 +130,17 @@
 
       const slideData = [
         {
-          image: 'image-1.jpg',
+          image: 'img/image-1.jpg',
           title: 'Breathtaking',
           text: 'We organize professional adventures! The most amazing corners of our planet. Our Routes change peoples lives forever.'
         },
         {
-          image: 'image-2.jpg',
+          image: 'img/image-2.jpg',
           title: 'Adventure Awaits',
           text: 'Discover hidden gems and create unforgettable memories. Every trail tells a story, every peak offers a new perspective.'
         },
         {
-          image: 'image-3.jpg',
+          image: 'img/image-3.jpg',
           title: 'Life Changing',
           text: 'Join thousands of adventurers who have found their passion through our carefully curated routes and expert guidance.'
         }
@@ -335,7 +214,7 @@
 
     <h4 class="text-2xl font-semibold mb-3">Watch the Itinerary</h4>
 <video autoplay loop muted playsinline class="w-full rounded shadow-lg">
-  <source src="4446471-uhd_3840_2160_25fps.mp4" type="video/mp4" />
+  <source src="wall.mp4" type="video/mp4" />
   Your browser does not support the video tag.
 </video>
 
@@ -415,6 +294,7 @@
           <li><a href="/pages/booking.html">Booking</a></li>
           <li><a href="/pages/info.html">Info</a></li>
           <li><a href="/pages/pricing.html">Pricing</a></li>
+          <li><a href="/pages/gallery.html">Gallery</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -451,4 +331,17 @@
   </footer>
 
 </body>
+<script>
+// Hamburger menu toggle for mobile
+const hamburger = document.getElementById('navbarHamburger');
+const menu = document.getElementById('navbarMenu');
+hamburger.addEventListener('click', function() {
+  menu.classList.toggle('active');
+});
+hamburger.addEventListener('keypress', function(e) {
+  if (e.key === 'Enter' || e.key === ' ') {
+    menu.classList.toggle('active');
+  }
+});
+</script>
 </html>
